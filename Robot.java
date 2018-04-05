@@ -226,7 +226,10 @@ public class Robot extends IterativeRobot
 		else if(gameData.equals("LLL") && chosenPosition.getSelected().equals("Right"))
 		{
 			liftLift(2, true);
-			driveDistance(120, 0.5);
+			turnAngle(45);
+			driveDistance(80, 0.5);
+			turnAngle(-45);
+			driveDistance(40, 0.5);
 		}
 		
 		//Possibility 4: Left Right Left, start left
@@ -255,14 +258,20 @@ public class Robot extends IterativeRobot
 		else if(gameData.equals("LRL") && chosenPosition.getSelected().equals("Right"))
 		{
 			liftLift(2, true);
-			driveDistance(120, 0.5);
+			turnAngle(45);
+			driveDistance(80, 0.5);
+			turnAngle(-45);
+			driveDistance(40, 0.5);
 		}
 		
 		//Possibility 7: Right Left Right, start left
 		else if(gameData.equals("RLR") && chosenPosition.getSelected().equals("Left"))
 		{
 			liftLift(2, true);
-			driveDistance(120, 0.5);
+			turnAngle(-45);
+			driveDistance(80, 0.5);
+			turnAngle(45);
+			driveDistance(40, 0.5);
 		}
 		
 		//Possibility 8: Right Left Right, start middle
@@ -290,7 +299,10 @@ public class Robot extends IterativeRobot
 		else if(gameData.equals("RRR") && chosenPosition.getSelected().equals("Left"))
 		{
 			liftLift(2, true);
-			driveDistance(120, 0.5);
+			turnAngle(-45);
+			driveDistance(80, 0.5);
+			turnAngle(45);
+			driveDistance(40, 0.5);
 		}
 		
 		//Possibility 11: Right Right Right, start middle
