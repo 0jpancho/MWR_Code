@@ -50,8 +50,8 @@ public class Robot extends IterativeRobot
 	boolean toggleArmsBool;
 	boolean togglePusher;
 	
-	static final boolean OPEN = true;
-	static final boolean CLOSE = false;
+	static final boolean OPEN = false;
+	static final boolean CLOSE = true;
 	
 	
 	AHRS navX;
@@ -134,8 +134,8 @@ public class Robot extends IterativeRobot
 	
 		limitSwitchTop = new DigitalInput(0);
 		
-		cubeArms = new DoubleSolenoid(0, 1);
-		cubePusher = new DoubleSolenoid(2, 3);
+		cubeArms = new DoubleSolenoid(2, 3);
+		cubePusher = new DoubleSolenoid(0, 1);
 		
 		driverOne = new Joystick(0);
 		driverTwo = new Joystick(1);
@@ -200,153 +200,178 @@ public class Robot extends IterativeRobot
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
+		resetDriveEncoders();
+		
+		autonTimer.stop();
+		autonTimer.reset();
+		
 		//Possibility 1: Left Left Left, start left
 		if(gameData.equals("LLL") && chosenPosition.getSelected().equals("Left"))
 		{	
 			liftLift(4, true);
-			driveDistance(100, 0.5);
-			//turnAngle(30);
-			//liftLift(4, true);
-			toggleArms(OPEN);
-			togglePusher(OPEN);
-			toggleArms(CLOSE);
-			togglePusher(CLOSE);
+			driveDistance(100, 0.4, 14);
+			toggleArms(true);
+			togglePusher(true);
+			
+			resetDriveEncoders();
 		}	
 		
 		//Possibility 2: Left Left Left, start middle
 		else if(gameData.equals("LLL") && chosenPosition.getSelected().equals("Middle"))
 		{
+			driveDistance(80, 0.5, 14);
+			
+			/*
 			liftLift(2, true);
 			driveDistance(10, 1);
 			turnAngle(30);
 			driveDistance(110, 0.5);
+			*/
 		}
 		
 		//Possibility 3: Left Left Left, start right
 		else if(gameData.equals("LLL") && chosenPosition.getSelected().equals("Right"))
 		{
+			driveDistance(80, 0.5, 14);
+			
+			/*
 			liftLift(2, true);
+			driveDistance(20, 0.5, 14);
 			turnAngle(45);
-			driveDistance(80, 0.5);
+			driveDistance(40, 0.5, 14);
 			turnAngle(-45);
-			driveDistance(40, 0.5);
+			driveDistance(40, 0.5, 14);
+			*/
 		}
 		
 		//Possibility 4: Left Right Left, start left
 		else if(gameData.equals("LRL") && chosenPosition.getSelected().equals("Left"))
 		{
-			liftLift(4, true);
-			driveDistance(100, 0.5);
-			//turnAngle(30);
-			//liftLift(4, true);
-			toggleArms(OPEN);
-			togglePusher(OPEN);
-			toggleArms(CLOSE);
-			togglePusher(CLOSE);
+			liftLift(5, true);
+			driveDistance(100, 0.5, 14);
+			toggleArms(true);
+			togglePusher(true);
 		}
 		
 		//Possibility 5: Left Right Left, start middle
 		else if(gameData.equals("LRL") && chosenPosition.getSelected().equals("Middle"))
 		{
+			/*
 			liftLift(2, true);
 			driveDistance(10, 1);
 			turnAngle(30);
 			driveDistance(100, 0.5);
+			*/
 		}
 		
 		//Possibility 6: Left Right Left, start right
 		else if(gameData.equals("LRL") && chosenPosition.getSelected().equals("Right"))
 		{
+			driveDistance(80, 0.5, 14);
+			/*
 			liftLift(2, true);
 			turnAngle(45);
 			driveDistance(80, 0.5);
 			turnAngle(-45);
 			driveDistance(40, 0.5);
+			*/
 		}
 		
 		//Possibility 7: Right Left Right, start left
 		else if(gameData.equals("RLR") && chosenPosition.getSelected().equals("Left"))
 		{
+			driveDistance(80, 0.5, 14);
+			/*
 			liftLift(2, true);
 			turnAngle(-45);
 			driveDistance(80, 0.5);
 			turnAngle(45);
 			driveDistance(40, 0.5);
+			*/
 		}
 		
 		//Possibility 8: Right Left Right, start middle
 		else if(gameData.equals("RLR") && chosenPosition.getSelected().equals("Middle"))
 		{
+			driveDistance(80, 0.5, 14);
+			/*
 			liftLift(2, true);
 			turnAngle(-45);
 			driveDistance(100, 0.5);
+			*/
 		}
 		
 		//Possibility 9: Right Left Right, start right
 		else if(gameData.equals("RLR") && chosenPosition.getSelected().equals("Right"))
 		{
-			liftLift(4, true);
-			driveDistance(100, 0.5);
-			//turnAngle(30);
-			//liftLift(4, true);
-			toggleArms(OPEN);
-			togglePusher(OPEN);
-			toggleArms(CLOSE);
-			togglePusher(CLOSE);
+			liftLift(5, true);
+			driveDistance(100, 0.5, 14);
+			toggleArms(true);
+			togglePusher(true);
 		}
 		
 		//Possibility 10: Right Right Right, start left
 		else if(gameData.equals("RRR") && chosenPosition.getSelected().equals("Left"))
 		{
+			driveDistance(80, 0.5, 14);
+		
+			/*
 			liftLift(2, true);
 			turnAngle(-45);
 			driveDistance(80, 0.5);
 			turnAngle(45);
 			driveDistance(40, 0.5);
+			*/
 		}
 		
 		//Possibility 11: Right Right Right, start middle
 		else if(gameData.equals("RRR") && chosenPosition.getSelected().equals("Middle"))
 		{
+			driveDistance(80, 0.5, 14);
+			/*
 			liftLift(2, true);
 			turnAngle(-45);
 			driveDistance(110, 0.5);
+			*/
 		}
 
 		//Possibility 12: Right Right Right, start right
 		else if(gameData.equals("RRR") && chosenPosition.getSelected().equals("Right"))
 		{
-			liftLift(4, true);
-			driveDistance(100, 0.5);
-			//turnAngle(30);
-			//liftLift(4, true);
-			toggleArms(OPEN);
-			togglePusher(OPEN);
-			toggleArms(CLOSE);
-			togglePusher(CLOSE);
+			liftLift(5, true);
+			driveDistance(100, 0.5, 14);
+			toggleArms(true);
+			togglePusher(true);
 		}
 		
 		//Test Mode LLL
 		else if(gameData.equals("LLL") && chosenPosition.getSelected().equals("Test"))
 		{
-			liftLift(2, true);
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			liftLift(2, false);
+			liftLift(5, true);
+			driveDistance(90, 0.5, 14);
+			toggleArms(true);
+			togglePusher(true);
+			//liftMaster.set(ControlMode.PercentOutput, -0.325);
+			
+			/*
+			driveDistance(60, 0.5);
+			toggleArms(OPEN);
+			togglePusher(OPEN);
+			toggleArms(CLOSE);
+			togglePusher(CLOSE);
+			*/
+			
+			//liftMaster.set(ControlMode.PercentOutput, 0);
 		}
 		
 		else if (gameData.equals("LLL") || gameData.equals("RRR") || gameData.equals("LRL") || gameData.equals("RLR") && chosenPosition.getSelected().equals("Drive to Switch"))
 		{
-			driveDistance(100, 0.5);
+			driveDistance(100, 0.5, 14);
 		}
 		
 		else if (gameData.equals("LLL") || gameData.equals("RRR") || gameData.equals("LRL") || gameData.equals("RLR") && chosenPosition.getSelected().equals("Drive to Scale"))
 		{
-			driveDistance(120, 0.5);
+			driveDistance(120, 0.5, 14);
 		}
 	}
 	
@@ -375,16 +400,14 @@ public class Robot extends IterativeRobot
 		}
 		
 		//Prevents lift from moving if top limit switch is active
-		if(limitSwitchTop.get() == true && operator.getY() > 0)
+		if(limitSwitchTop.get() == true && operator.getY() < 0)
 		{
 			liftMaster.set(ControlMode.Disabled, 0);
 		}
 		else 
 		{
-			
 			//Lift Control
-			liftMaster.set(ControlMode.PercentOutput, operator.getRawAxis(kGamepadAxisLeftStickY) * 0.75);
-			
+			liftMaster.set(ControlMode.PercentOutput, operator.getRawAxis(kGamepadAxisLeftStickY) * 0.75);	
 		}
 		
 		//Toggle compressor activation
@@ -398,10 +421,8 @@ public class Robot extends IterativeRobot
 			compressor.stop();
 		}
 		
-		
-	
 		//Toggles arm states
-		if (operator.getRawButton(kGamepadButtonShoulderL) && !toggleArmsBool)
+		if (operator.getRawAxis(3) == 1 && !toggleArmsBool)
 		{
 			if(cubeArms.get() == Value.kReverse || cubeArms.get() == Value.kOff)
 				cubeArms.set(Value.kForward);
@@ -411,13 +432,14 @@ public class Robot extends IterativeRobot
 				
 			toggleArmsBool = true;
 		}
-		
-		else if(!operator.getRawButton(kGamepadButtonShoulderL))
+	
+		else if(operator.getRawAxis(3) < 1)
 			toggleArmsBool = false;
 		
 		//Toggles pusher states
-		if (operator.getRawButton(kGamepadButtonShoulderR) && !togglePusher)
+		if (operator.getRawAxis(2) == 1 && !togglePusher)
 		{
+			
 			if(cubePusher.get() == Value.kReverse || cubePusher.get() == Value.kOff)
 				cubePusher.set(Value.kForward);
 			
@@ -427,7 +449,7 @@ public class Robot extends IterativeRobot
 			togglePusher = true;
 		}
 		
-		else if (operator.getRawButton(kGamepadButtonShoulderR))
+		else if (operator.getRawAxis(2) < 1)
 			togglePusher = false;
 		
 		
@@ -528,14 +550,18 @@ public class Robot extends IterativeRobot
 		rightMaster.getSensorCollection().setQuadraturePosition(0, 20);
 	}
 	
-	public void driveDistance(double inches, double speed)
+	public void driveDistance(double inches, double speed, int timeout)
 	{
 		double targetCounts = countsPerInch * inches;
+		
+		Timer thisTimer = new Timer();
 		
 		resetDriveEncoders();
 		
 		System.out.println(targetCounts);
-		while (this.isEnabled())
+		thisTimer.reset();
+		thisTimer.start();
+		while (this.isEnabled() && thisTimer.get() < timeout)
 		{	
 			robotTelemetry();
 			
@@ -549,19 +575,21 @@ public class Robot extends IterativeRobot
 				rightMaster.set(ControlMode.PercentOutput, -speed);
 			}
 			
-			if(targetCounts < leftMaster.getSensorCollection().getQuadraturePosition() 
-					|| targetCounts < rightMaster.getSensorCollection().getQuadraturePosition())
+			if(targetCounts <= leftMaster.getSensorCollection().getQuadraturePosition() 
+					|| targetCounts <= rightMaster.getSensorCollection().getQuadraturePosition())
 				break;
 		}
 		
 		leftMaster.set(ControlMode.Disabled, 0);
 		rightMaster.set(ControlMode.Disabled, 0);
+		
+		resetDriveEncoders();
 	}
 	
 	public void liftLift(double duration, boolean upward)
-	{
+	{	
 		autonTimer.start();
-		
+
 		double speed = -0.5;
 		
 		if (!upward)
@@ -570,6 +598,7 @@ public class Robot extends IterativeRobot
 		while (autonTimer.get() >= 0 && autonTimer.get() < duration && !limitSwitchTop.get())
 		{
 			liftMaster.set(ControlMode.PercentOutput, speed);
+
 		}
 		
 		liftMaster.set(ControlMode.Disabled, 0);
@@ -604,6 +633,20 @@ public class Robot extends IterativeRobot
 		}
 	}
 	
+	public void doNothing(double duration)
+	{
+		autonTimer.start();
+		
+		while (autonTimer.get() >= 0 && autonTimer.get() <= duration)
+		{
+			//Literally do absolutely nothing
+		}
+		
+		autonTimer.stop();
+		autonTimer.reset();
+		
+	}
+	
 	public void robotTelemetry() 
 	{	
 		sdTable.putDouble("OrIeNtAtIoN", navX.getYaw());
@@ -619,5 +662,10 @@ public class Robot extends IterativeRobot
 		
 		SmartDashboard.putBoolean("Pusher Toggled?", cubePusher.get() == Value.kForward);
 		SmartDashboard.putBoolean("Arms Toggled?", cubeArms.get() == Value.kForward);
+		
+		//SmartDashboard.putNumber("Current Auton Time", autonTimer.get());
+		//System.out.println(autonTimer.get());
+		
+		//SmartDashboard.putNumber("Lifter Speed", operator.getRawAxis(kGamepadAxisLeftStickY) * 0.75);
 	}
 }
