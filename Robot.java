@@ -152,6 +152,7 @@ public class Robot extends IterativeRobot
 		chosenPosition.addObject("Test", "Test");
 		chosenPosition.addObject("Drive to Switch", "Drive to Switch");
 		chosenPosition.addObject("Drive to Scale", "Drive to Scale");
+		
 		SmartDashboard.putData("chosenPosition", chosenPosition);
 		
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 20);	
@@ -208,7 +209,7 @@ public class Robot extends IterativeRobot
 		//Possibility 1: Left Left Left, start left
 		if(gameData.equals("LLL") && chosenPosition.getSelected().equals("Left"))
 		{	
-			liftLift(4, true);
+			liftLift(5, true);
 			driveDistance(100, 0.4, 14);
 			toggleArms(true);
 			togglePusher(true);
@@ -373,6 +374,9 @@ public class Robot extends IterativeRobot
 		{
 			driveDistance(120, 0.5, 14);
 		}
+		
+		resetDriveEncoders();
+		//Hai
 	}
 	
 	@Override
